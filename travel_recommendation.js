@@ -33,7 +33,16 @@ const searchBtn = document.getElementById("searchBtn");
 const searchBar = document.getElementById("searchBar");
 const resetBtn = document.getElementById("resetBtn");
 
-const setResults = (result)=>{
+const setResults = (result,isCountry=false)=>{
+    if(isCountry){
+            searchResultElementContainer.innerHTML= result.cities.map(e=>`
+    <div>
+    <img src=${e.imageUrl} >  
+    <h3>${e.name}</h3>
+    <p>${e.description}</p>
+</div>`).join('')
+    }
+    else{
     searchResultElementContainer.innerHTML= result.map(e=>`
     <div>
     <img src=${e.imageUrl} >  
@@ -41,6 +50,7 @@ const setResults = (result)=>{
     <p>${e.description}</p>
 </div>
 `).join('')
+    }
 }
 const clear = ()=>{
     searchResultElementContainer.innerHTML="";
