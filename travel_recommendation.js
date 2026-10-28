@@ -35,7 +35,10 @@ const resetBtn = document.getElementById("resetBtn");
 
 const setResults = (result,isCountry=false)=>{
     if(isCountry){
-            searchResultElementContainer.innerHTML= result.cities.map(e=>`
+        const countries= [];
+            result.forEach(e=> e.cities.forEach(i=> countries.push(i)))
+            console.log(countries)
+        searchResultElementContainer.innerHTML= countries.map(e=>`
     <div>
     <img src=${e.imageUrl} >  
     <h3>${e.name}</h3>
@@ -64,6 +67,11 @@ if(data.length==0){
     searchResultElementContainer.innerText= '0 results found';
 return
 }
-     setResults(data);   
+if(searchBar.value.toLowerCase().includes('count'))
+     setResults(data,true);   
+else{
+    setResults(data,false);   
+}
+
 })
 resetBtn.addEventListener("click", clear)
